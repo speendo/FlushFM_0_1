@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block pagetitle %}
+MPD-Client
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% endblock %}
+
+{% block content %}
+<form action="{% url 'mpd_client:play' %}" method="post">
+	{% csrf_token %}
+	<label for="uri" class="ui-hidden-accessible">Url zu Webstream (bitte noch(!) keine Links auf m3u-Dateien):</label>
+	<input type="text" name="uri" id="uri" size="60" value="{{ uri }}" placeholder="Webstream-URL (bitte noch(!) keine m3u-Links)" />
+	<input type="submit" value="Play" data-inline="true" name="play" />
+	<input type="submit" value="Stop" data-inline="true" name="stop" />
+</form>
+{% endblock %}
